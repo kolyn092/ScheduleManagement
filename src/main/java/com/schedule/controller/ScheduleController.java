@@ -40,4 +40,10 @@ public class ScheduleController {
         var res = scheduleService.update(id, req);
         return ResponseEntity.status(HttpStatus.OK).body(res);
     }
+
+    @DeleteMapping("/api/schedules/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        scheduleService.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

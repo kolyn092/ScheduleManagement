@@ -57,4 +57,13 @@ public class ScheduleService {
         }
         return ScheduleResponse.from(schedule);
     }
+
+    @Transactional
+    public void delete(Long id) {
+        boolean existence = scheduleRepository.existsById(id);
+        if (!existence) {
+            throw new IllegalStateException("존재하지 않는 일정입니다.");
+        }
+        scheduleRepository.deleteById(id);
+    }
 }
