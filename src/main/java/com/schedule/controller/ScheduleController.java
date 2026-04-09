@@ -1,6 +1,7 @@
 package com.schedule.controller;
 
 import com.schedule.dto.request.CreateScheduleRequest;
+import com.schedule.dto.request.UpdateScheduleRequest;
 import com.schedule.dto.response.ScheduleResponse;
 import com.schedule.entity.Schedule;
 import com.schedule.service.ScheduleService;
@@ -31,6 +32,12 @@ public class ScheduleController {
     @GetMapping("/api/schedules/{id}")
     public ResponseEntity<ScheduleResponse> get(@PathVariable Long id) {
         var res = scheduleService.get(id);
+        return ResponseEntity.status(HttpStatus.OK).body(res);
+    }
+
+    @PatchMapping("/api/schedules/{id}")
+    public ResponseEntity<ScheduleResponse> update(@PathVariable Long id, @RequestBody UpdateScheduleRequest req) {
+        var res = scheduleService.update(id, req);
         return ResponseEntity.status(HttpStatus.OK).body(res);
     }
 }

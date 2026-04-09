@@ -1,6 +1,7 @@
 package com.schedule.entity;
 
 import com.schedule.dto.request.CreateScheduleRequest;
+import com.schedule.dto.request.UpdateScheduleRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -42,5 +43,10 @@ public class Schedule extends BaseEntity {
                 req.getAuthor(),
                 req.getPassword()
         );
+    }
+
+    public void update(UpdateScheduleRequest req) {
+        this.title = req.getTitle();
+        this.author = req.getAuthor();
     }
 }

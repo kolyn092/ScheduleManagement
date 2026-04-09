@@ -1,6 +1,7 @@
 package com.schedule.service;
 
 import com.schedule.dto.request.CreateScheduleRequest;
+import com.schedule.dto.request.UpdateScheduleRequest;
 import com.schedule.dto.response.ScheduleResponse;
 import com.schedule.entity.Schedule;
 import com.schedule.repository.ScheduleRepository;
@@ -42,6 +43,18 @@ public class ScheduleService {
         var schedule = scheduleRepository.findById(id).orElseThrow(
                 () -> new IllegalStateException("존재하지 않는 일정입니다.")
         );
+        return ScheduleResponse.from(schedule);
+    }
+
+    @Transactional
+    public ScheduleResponse update(Long id, UpdateScheduleRequest req) {
+        var schedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new IllegalStateException("존재하지 않는 일정입니다.")
+        );
+        if (schedule.getPassword().equals(req.getPassword())) {
+            schedule.update(req);
+            scheduleRepository.saveAndFlush(schedule);
+        }
         return ScheduleResponse.from(schedule);
     }
 }

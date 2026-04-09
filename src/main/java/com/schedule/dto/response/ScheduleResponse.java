@@ -17,13 +17,13 @@ public class ScheduleResponse {
     private final LocalDateTime modifiedAt;
 
     public ScheduleResponse(Long id, String title, String content, String author,
-                                  LocalDateTime createdAt) {
+                                  LocalDateTime createdAt, LocalDateTime modifiedAt) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.author = author;
         this.createdAt = createdAt;
-        this.modifiedAt = createdAt;
+        this.modifiedAt = modifiedAt;
     }
 
     public static ScheduleResponse from(Schedule schedule) {
@@ -32,7 +32,8 @@ public class ScheduleResponse {
                 schedule.getTitle(),
                 schedule.getContent(),
                 schedule.getAuthor(),
-                schedule.getCreatedAt()
+                schedule.getCreatedAt(),
+                schedule.getModifiedAt()
         );
     }
 
