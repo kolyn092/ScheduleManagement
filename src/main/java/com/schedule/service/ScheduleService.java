@@ -1,6 +1,7 @@
 package com.schedule.service;
 
 import com.schedule.dto.request.CreateScheduleRequest;
+import com.schedule.dto.request.DeleteScheduleRequest;
 import com.schedule.dto.request.UpdateScheduleRequest;
 import com.schedule.dto.response.ScheduleResponse;
 import com.schedule.entity.Schedule;
@@ -59,10 +60,12 @@ public class ScheduleService {
     }
 
     @Transactional
-    public void delete(Long id) {
-        boolean existence = scheduleRepository.existsById(id);
-        if (!existence) {
-            throw new IllegalStateException("존재하지 않는 일정입니다.");
+    public void delete(Long id, DeleteScheduleRequest req) {
+        var schedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new IllegalStateException("존재하지 않는 일정입니다.")
+        );
+        if (!schedule.getPassword().equals(req.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
         scheduleRepository.deleteById(id);
     }
