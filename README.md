@@ -22,7 +22,7 @@ POST /api/schedules
 Content-Type: application/json
 ```
 
-| 이름         | 데이터타입       | 설명        |
+| 이름           | 데이터타입            | 설명        |
 |:-------------|:-----------------|:----------|
 | Content-Type | application/json | 요청 데이터 형식 |
 
@@ -37,12 +37,12 @@ Content-Type: application/json
 }
 ```
 
-| 이름          | 데이터타입 | 설명            |
-|:------------|:-----------|:----------------|
-| title       | String     | 일정 제목        |
-| content     | String     | 일정 내용        |
-| author      | String     | 작성자명         |
-| password    | String     | 비밀번호         |
+| 이름       | 데이터타입  | 설명    |
+|:---------|:-------|:------|
+| title    | String | 일정 제목 |
+| content  | String | 일정 내용 |
+| author   | String | 작성자명  |
+| password | String | 비밀번호  |
 
 ---
 
@@ -52,31 +52,31 @@ Content-Type: application/json
 Content-Type: application/json
 ```
 
-| 이름         | 데이터타입       | 설명            |
-|:-------------|:-----------------|:----------------|
+| 이름           | 데이터타입            | 설명        |
+|:-------------|:-----------------|:----------|
 | Content-Type | application/json | 응답 데이터 형식 |
 
 #### Response Body
+✅ 201 Created
 ```json
 {
     "id": 1,
     "title": "회의",
     "content": "팀 회의 진행",
     "author": "홍길동",
-    "createAt": "2026-04-08T20:00",
-    "modifiedAt": "2026-04-09T00:00"
+    "createdAt": "2026-04-08T20:00",
+    "modifiedAt": "2026-04-08T20:00"
 }
 ```
 
-| 이름           | 데이터타입    | 설명        |
-|:-------------|:---------|:----------|
-| id           | Long  | 일정 id |
-| title        | String   | 일정 제목     |
-| content      | String   | 일정 내용     |
-| author       | String   | 작성자명      |
-| createAt     | DateTime   | 작성일       |
-| modifiedAt   | DateTime | 수정일       |
-
+| 이름         | 데이터타입    | 설명    |
+|:-----------|:---------|:------|
+| id         | Long     | 일정 id |
+| title      | String   | 일정 제목 |
+| content    | String   | 일정 내용 |
+| author     | String   | 작성자명  |
+| createdAt  | DateTime | 생성일   |
+| modifiedAt  | DateTime | 수정일   |
 
 </details>
 
@@ -112,8 +112,8 @@ Query Parameter: author (optional)
 Content-Type: application/json
 ```
 
-| 이름         | 데이터타입       | 설명            |
-|:-------------|:-----------------|:----------------|
+| 이름           | 데이터타입            | 설명        |
+|:-------------|:-----------------|:----------|
 | Content-Type | application/json | 응답 데이터 형식 |
 
 #### Response Body
@@ -125,7 +125,7 @@ Content-Type: application/json
     "title": "회의",
     "content": "팀 회의 진행",
     "author": "홍길동",
-    "createAt": "2026-04-08T20:00",
+    "createdAt": "2026-04-08T20:00",
     "modifiedAt": "2026-04-09T00:00"
   },
   {
@@ -133,20 +133,20 @@ Content-Type: application/json
     "title": "강의",
     "content": "강의 수강",
     "author": "홍길동",
-    "createAt": "2026-04-08T22:00",
+    "createdAt": "2026-04-08T22:00",
     "modifiedAt": "2026-04-08T23:00"
   }
 ]
 ```
 
-| 이름         | 데이터타입       | 설명    |
-|:-------------|:-----------------|:------|
-| id           | Long  | 일정 id |
-| title        | String   | 일정 제목 |
-| content      | String   | 일정 내용 |
-| author       | String   | 작성자명  |
-| createAt     | DateTime   | 작성일   |
-| modifiedAt   | DateTime | 수정일   |
+| 이름         | 데이터타입    | 설명    |
+|:-----------|:---------|:------|
+| id         | Long     | 일정 id |
+| title      | String   | 일정 제목 |
+| content    | String   | 일정 내용 |
+| author     | String   | 작성자명  |
+| createdAt  | DateTime | 생성일   |
+| modifiedAt | DateTime | 수정일   |
 
 </details>
 
@@ -170,9 +170,9 @@ GET /api/schedules/{id}
 Path Variable: id
 ```
 
-| 이름 | 데이터타입 | 설명            |
-|:---|:------|:----------------|
-| id           | Long  | 일정 id |
+| 이름 | 데이터타입 | 설명    |
+|:---|:------|:------|
+| id | Long  | 일정 id |
 
 ---
 
@@ -182,7 +182,7 @@ Path Variable: id
 Content-Type: application/json
 ```
 
-| 이름         | 데이터타입       | 설명        |
+| 이름           | 데이터타입            | 설명        |
 |:-------------|:-----------------|:----------|
 | Content-Type | application/json | 응답 데이터 형식 |
 
@@ -194,19 +194,19 @@ Content-Type: application/json
   "title": "회의",
   "content": "팀 회의 진행",
   "author": "홍길동",
-  "createAt": "2026-04-08T20:00",
+  "createdAt": "2026-04-08T20:00",
   "modifiedAt": "2026-04-09T00:00"
 }
 ```
 
-| 이름         | 데이터타입       | 설명            |
-|:-------------|:-----------------|:----------------|
-| id           | Long  | 일정 id |
-| title        | String   | 일정 제목     |
-| content      | String   | 일정 내용     |
-| author       | String   | 작성자명      |
-| createAt     | DateTime   | 작성일       |
-| modifiedAt   | DateTime | 수정일       |
+| 이름         | 데이터타입    | 설명    |
+|:-----------|:---------|:------|
+| id         | Long     | 일정 id |
+| title      | String   | 일정 제목 |
+| content    | String   | 일정 내용 |
+| author     | String   | 작성자명  |
+| createdAt  | DateTime | 생성일   |
+| modifiedAt | DateTime | 수정일   |
 
 </details>
 
@@ -230,9 +230,9 @@ PATCH /api/schedules/{id}
 Path Variable: id
 ```
 
-| 이름         | 데이터타입       | 설명        |
-|:-------------|:-----------------|:----------|
-| id           | Long  | 수정할 일정 id |
+| 이름 | 데이터타입 | 설명        |
+|:---|:------|:----------|
+| id | Long  | 수정할 일정 id |
 
 ---
 
@@ -242,7 +242,7 @@ Path Variable: id
 Content-Type: application/json
 ```
 
-| 이름         | 데이터타입       | 설명        |
+| 이름           | 데이터타입            | 설명        |
 |:-------------|:-----------------|:----------|
 | Content-Type | application/json | 요청 데이터 형식 |
 
@@ -256,11 +256,11 @@ Content-Type: application/json
 }
 ```
 
-| 이름         | 데이터타입       | 설명        |
-|:-------------|:-----------------|:----------|
-| title        | String   | 수정할 일정 제목 |
-| author       | String   | 수정할 작성자명  |
-| password    | String     | 검증용 비밀번호  |
+| 이름       | 데이터타입  | 설명        |
+|:---------|:-------|:----------|
+| title    | String | 수정할 일정 제목 |
+| author   | String | 수정할 작성자명  |
+| password | String | 검증용 비밀번호  |
 
 ---
 
@@ -270,7 +270,7 @@ Content-Type: application/json
 Content-Type: application/json
 ```
 
-| 이름         | 데이터타입       | 설명        |
+| 이름           | 데이터타입            | 설명        |
 |:-------------|:-----------------|:----------|
 | Content-Type | application/json | 응답 데이터 형식 |
 
@@ -282,19 +282,19 @@ Content-Type: application/json
     "title": "팀 회의",
     "content": "팀 회의 진행",
     "author": "홍길동",
-    "createAt": "2026-04-08T20:00",
+    "createdAt": "2026-04-08T20:00",
     "modifiedAt": "2026-04-09T01:00"
   }
 ```
 
-| 이름         | 데이터타입       | 설명            |
-|:-------------|:-----------------|:----------------|
-| id           | Long  | 일정 id |
-| title        | String   | 일정 제목     |
-| content      | String   | 일정 내용     |
-| author       | String   | 작성자명      |
-| createAt     | DateTime   | 작성일       |
-| modifiedAt   | DateTime | 수정일       |
+| 이름         | 데이터타입    | 설명    |
+|:-----------|:---------|:------|
+| id         | Long     | 일정 id |
+| title      | String   | 일정 제목 |
+| content    | String   | 일정 내용 |
+| author     | String   | 작성자명  |
+| createdAt  | DateTime | 생성일   |
+| modifiedAt | DateTime | 수정일   |
 
 </details>
 
@@ -318,9 +318,9 @@ DELETE /api/schedules/{id}
 Path Variable: id
 ```
 
-| 이름         | 데이터타입       | 설명        |
-|:-------------|:-----------------|:----------|
-| id           | Long  | 삭제할 일정 id |
+| 이름 | 데이터타입 | 설명        |
+|:---|:------|:----------|
+| id | Long  | 삭제할 일정 id |
 
 ---
 
@@ -330,8 +330,8 @@ Path Variable: id
 Content-Type: application/json
 ```
 
-| 이름         | 데이터타입       | 설명            |
-|:-------------|:-----------------|:----------------|
+| 이름           | 데이터타입            | 설명        |
+|:-------------|:-----------------|:----------|
 | Content-Type | application/json | 요청 데이터 형식 |
 
 #### Request Body
@@ -342,15 +342,15 @@ Content-Type: application/json
 }
 ```
 
-| 이름         | 데이터타입       | 설명          |
-|:-------------|:-----------------|:------------|
-| password    | String     | 삭제 검증용 비밀번호 |
+| 이름       | 데이터타입  | 설명          |
+|:---------|:-------|:------------|
+| password | String | 삭제 검증용 비밀번호 |
 
 </details>
 
 ---
 
-#### Error Code
+#### ❌ Error Code
 
 | 오류 코드 | HTTP 상태 코드 | 오류 메시지                      |
 |:------|:-----------|:----------------------------|
@@ -364,14 +364,14 @@ Content-Type: application/json
 
 <details><summary> Schedule Table </summary>
 
-| 컬럼명      | 타입        | Null | Key | Default  | 설명       |
-|:-----------|:-----------|:-----|:----|:---------|:---------|
-| id         | BIGINT     | X    | PK  |          | 일정 고유 id |
-| title      | VARCHAR    | X    |     |          | 일정 제목    |
-| content    | VARCHAR    | X    |     |          | 일정 내용    |
-| author     | VARCHAR    | X    |     |          | 작성자명     |
-| password   | VARCHAR    | X    |     |          | 비밀번호     |
-| createAt   | DATETIME   | X    |     |          | 작성일      |
-| modifiedAt | DATETIME   | X    |     |          | 수정일      |
+| Column     | Type         | Nullable       | Key | Default | Desc     |
+|:-----------|:-------------|:---------------|:----|:--------|:---------|
+| id         | BIGINT       | NO             | PK  |         | 일정 고유 id |
+| title      | VARCHAR(128) | NO             |     |         | 일정 제목    |
+| content    | VARCHAR(255) | NO             |     |         | 일정 내용    |
+| author     | VARCHAR(50)  | NO             |     |         | 작성자명     |
+| password   | VARCHAR(128) | NO             |     |         | 비밀번호     |
+| createdAt  | DATETIME     | NO             |     |         | 생성일      |
+| modifiedAt | DATETIME     | NO             |     |         | 수정일      |
 
 </details>
