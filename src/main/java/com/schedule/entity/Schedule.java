@@ -1,6 +1,6 @@
 package com.schedule.entity;
 
-import com.schedule.dto.CreateScheduleRequest;
+import com.schedule.dto.request.CreateScheduleRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
