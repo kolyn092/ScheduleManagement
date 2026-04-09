@@ -1,11 +1,13 @@
 package com.schedule.service;
 
-import com.schedule.dto.CreateScheduleRequest;
-import com.schedule.dto.CreateScheduleResponse;
+import com.schedule.dto.request.CreateScheduleRequest;
+import com.schedule.dto.response.ScheduleResponse;
 import com.schedule.entity.Schedule;
 import com.schedule.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class ScheduleService {
@@ -18,9 +20,28 @@ public class ScheduleService {
 
     // 일정 생성
     @Transactional
-    public CreateScheduleResponse create(CreateScheduleRequest req) {
+    public ScheduleResponse create(CreateScheduleRequest req) {
         var schedule = Schedule.to(req);
         var res = scheduleRepository.save(schedule);
-        return CreateScheduleResponse.from(res);
+        return ScheduleResponse.from(res);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ScheduleResponse> getAll(String author) {
+        List<Schedule> schedules;
+        if (author == null || author.isBlank()) {
+            schedules = scheduleRepository.findAllByOrderByModifiedAtDesc();
+        } else {
+            schedules = scheduleRepository.findByAuthorOrderByModifiedAtDesc(author);
+        }
+        return ScheduleResponse.from(schedules);
+    }
+
+    @Transactional(readOnly = true)
+    public ScheduleResponse get(Long id) {
+        var schedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new IllegalStateException("존재하지 않는 일정입니다.")
+        );
+        return ScheduleResponse.from(schedule);
     }
 }
