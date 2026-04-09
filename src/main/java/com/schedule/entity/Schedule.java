@@ -1,17 +1,16 @@
 package com.schedule.entity;
 
+import com.schedule.dto.CreateScheduleRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Getter
 @Entity
 @Table(name = "Schedule")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Schedule {
+public class Schedule extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본 키 생성을 데이터베이스에 위임
@@ -29,6 +28,19 @@ public class Schedule {
     @Column(length = 128, nullable = false)
     private String password;
 
-    private Date createAt;
-    private Date modifiedAt;
+    public Schedule(String title, String content, String author, String password) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.password = password;
+    }
+
+    public static Schedule to(CreateScheduleRequest req) {
+        return new Schedule(
+                req.getTitle(),
+                req.getContent(),
+                req.getAuthor(),
+                req.getPassword()
+        );
+    }
 }
