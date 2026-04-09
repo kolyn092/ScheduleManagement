@@ -36,4 +36,12 @@ public class ScheduleService {
         }
         return ScheduleResponse.from(schedules);
     }
+
+    @Transactional(readOnly = true)
+    public ScheduleResponse get(Long id) {
+        var schedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new IllegalStateException("존재하지 않는 일정입니다.")
+        );
+        return ScheduleResponse.from(schedule);
+    }
 }

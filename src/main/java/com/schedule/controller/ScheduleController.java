@@ -27,4 +27,10 @@ public class ScheduleController {
         var res = scheduleService.getAll(author);
         return ResponseEntity.status(HttpStatus.OK).body(res);
     }
+
+    @GetMapping("/api/schedules/{id}")
+    public ResponseEntity<ScheduleResponse> get(@PathVariable Long id) {
+        var res = scheduleService.get(id);
+        return ResponseEntity.status(HttpStatus.OK).body(res);
+    }
 }
