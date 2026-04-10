@@ -1,5 +1,6 @@
 package com.schedule.entity;
 
+import com.schedule.dto.request.CreateCommentRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -28,9 +29,19 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "schedule_id")
     private Schedule schedule;
 
-    public Comment(String content, String author, String password) {
+    public Comment(String content, String author, String password, Schedule schedule) {
         this.content = content;
         this.author = author;
         this.password = password;
+        this.schedule = schedule;
+    }
+
+    public static Comment to(CreateCommentRequest req, Schedule schedule) {
+        return new Comment(
+                req.getContent(),
+                req.getAuthor(),
+                req.getPassword(),
+                schedule
+        );
     }
 }
