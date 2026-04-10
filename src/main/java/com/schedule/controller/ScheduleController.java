@@ -38,13 +38,26 @@ public class ScheduleController {
 
     @PatchMapping("/api/schedules/{id}")
     public ResponseEntity<ScheduleResponse> update(@PathVariable Long id, @RequestBody UpdateScheduleRequest req) {
-        var res = scheduleService.update(id, req);
+        ScheduleResponse res;
+        try {
+            res = scheduleService.update(id, req);
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
         return ResponseEntity.status(HttpStatus.OK).body(res);
     }
 
     @DeleteMapping("/api/schedules/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id, @RequestBody DeleteScheduleRequest req) {
-        scheduleService.delete(id, req);
+        try {
+            scheduleService.delete(id, req);
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

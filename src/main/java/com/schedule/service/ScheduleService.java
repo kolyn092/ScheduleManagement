@@ -55,6 +55,8 @@ public class ScheduleService {
         if (schedule.getPassword().equals(req.getPassword())) {
             schedule.update(req);
             scheduleRepository.saveAndFlush(schedule);
+        } else {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
         return ScheduleResponse.from(schedule);
     }
