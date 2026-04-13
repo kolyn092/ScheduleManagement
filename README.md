@@ -56,6 +56,8 @@ git clone https://github.com/kolyn092/ScheduleManagement.git
 ./gradlew bootRun
 ```
 
+---
+
 ## 📄 API 명세서
 
 ### 일정 생성 (POST)
