@@ -30,10 +30,10 @@ Content-Type: application/json
 
 ```json
 {
-    "title": "회의",
-    "content": "팀 회의 진행",
-    "author": "홍길동",
-    "password": "1234"
+  "title" : "회의",
+  "content" : "팀 회의 진행",
+  "author" : "홍길동",
+  "password" : "1234"
 }
 ```
 
@@ -60,15 +60,25 @@ Content-Type: application/json
 ✅ 201 Created
 ```json
 {
+  "message": "생성 완료",
+  "data": {
     "id": 1,
     "title": "회의",
     "content": "팀 회의 진행",
     "author": "홍길동",
-    "createdAt": "2026-04-08T20:00",
-    "modifiedAt": "2026-04-08T20:00"
+    "createdAt": "2026-04-13T14:41:54.425099",
+    "modifiedAt": "2026-04-13T14:41:54.425099"
+  }
 }
 ```
 
+#### response 구조
+| 이름      | 데이터타입  | 설명     |
+|:--------|:-------|:-------|
+| message | String | 응답 메세지 |
+| data    | Object | 응답 데이터 |
+
+#### data 내부 구조
 | 이름         | 데이터타입    | 설명    |
 |:-----------|:---------|:------|
 | id         | Long     | 일정 id |
@@ -117,28 +127,37 @@ Content-Type: application/json
 | Content-Type | application/json | 응답 데이터 형식 |
 
 #### Response Body
-
+✅ 200 OK
 ```json
-[
-  {
-    "id": 1,
-    "title": "회의",
-    "content": "팀 회의 진행",
-    "author": "홍길동",
-    "createdAt": "2026-04-08T20:00",
-    "modifiedAt": "2026-04-09T00:00"
-  },
-  {
-    "id": 2,
-    "title": "강의",
-    "content": "강의 수강",
-    "author": "홍길동",
-    "createdAt": "2026-04-08T22:00",
-    "modifiedAt": "2026-04-08T23:00"
-  }
-]
+{
+  "message": "조회 완료",
+  "data": [
+    {
+      "id": 2,
+      "title": "강의",
+      "content": "강의 수강",
+      "author": "강호동",
+      "createdAt": "2026-04-13T14:42:14.147359",
+      "modifiedAt": "2026-04-13T14:42:14.147359"
+    },
+    {
+      "id": 1,
+      "title": "회의",
+      "content": "팀 회의 진행",
+      "author": "홍길동",
+      "createdAt": "2026-04-13T14:41:54.425099",
+      "modifiedAt": "2026-04-13T14:41:54.425099"
+    }
+  ]
+}
 ```
+#### response 구조
+| 이름      | 데이터타입  | 설명     |
+|:--------|:-------|:-------|
+| message | String | 응답 메세지 |
+| data    | Array  | 응답 데이터 |
 
+#### data 내부 구조
 | 이름         | 데이터타입    | 설명    |
 |:-----------|:---------|:------|
 | id         | Long     | 일정 id |
@@ -187,23 +206,51 @@ Content-Type: application/json
 | Content-Type | application/json | 응답 데이터 형식 |
 
 #### Response Body
-
+✅ 200 OK
 ```json
 {
-  "id": 1,
-  "title": "회의",
-  "content": "팀 회의 진행",
-  "author": "홍길동",
-  "createdAt": "2026-04-08T20:00",
-  "modifiedAt": "2026-04-09T00:00"
+  "message": "조회 완료",
+  "data": {
+    "id": 1,
+    "title": "회의",
+    "content": "팀 회의 진행",
+    "author": "홍길동",
+    "createdAt": "2026-04-13T14:41:54.425099",
+    "modifiedAt": "2026-04-13T14:41:54.425099",
+    "comments": [
+      {
+        "id": 1,
+        "content": "댓글을 아무지게 적어볼까",
+        "author": "홍길동",
+        "createdAt": "2026-04-13T14:54:15.430703",
+        "modifiedAt": "2026-04-13T14:54:15.430703"
+      }
+    ]
+  }
 }
 ```
+#### response 구조
+| 이름      | 데이터타입  | 설명     |
+|:--------|:-------|:-------|
+| message | String | 응답 메세지 |
+| data    | Object | 응답 데이터 |
 
+#### data 내부 구조
 | 이름         | 데이터타입    | 설명    |
 |:-----------|:---------|:------|
 | id         | Long     | 일정 id |
 | title      | String   | 일정 제목 |
 | content    | String   | 일정 내용 |
+| author     | String   | 작성자명  |
+| createdAt  | DateTime | 생성일   |
+| modifiedAt | DateTime | 수정일   |
+| comments   | Array    | 댓글 목록 |
+
+#### comments 내부 구조
+| 이름         | 데이터타입    | 설명    |
+|:-----------|:---------|:------|
+| id         | Long     | 댓글 id |
+| content    | String   | 댓글 내용 |
 | author     | String   | 작성자명  |
 | createdAt  | DateTime | 생성일   |
 | modifiedAt | DateTime | 수정일   |
@@ -250,8 +297,8 @@ Content-Type: application/json
 
 ```json
 {
-  "title": "팀 회의",
-  "author": "홍길동",
+  "title": "팀 회의 수정",
+  "author": "강호동",
   "password": "1234"
 }
 ```
@@ -275,18 +322,28 @@ Content-Type: application/json
 | Content-Type | application/json | 응답 데이터 형식 |
 
 #### Response Body
-
+✅ 200 OK
 ```json
 {
+  "message": "수정 완료",
+  "data": {
     "id": 1,
-    "title": "팀 회의",
+    "title": "팀 회의 수정",
     "content": "팀 회의 진행",
-    "author": "홍길동",
-    "createdAt": "2026-04-08T20:00",
-    "modifiedAt": "2026-04-09T01:00"
+    "author": "강호동",
+    "createdAt": "2026-04-13T14:41:54.425099",
+    "modifiedAt": "2026-04-13T15:00:16.7752547"
   }
+}
 ```
 
+#### response 구조
+| 이름      | 데이터타입  | 설명     |
+|:--------|:-------|:-------|
+| message | String | 응답 메세지 |
+| data    | Object | 응답 데이터 |
+
+#### data 내부 구조
 | 이름         | 데이터타입    | 설명    |
 |:-----------|:---------|:------|
 | id         | Long     | 일정 id |
@@ -338,13 +395,39 @@ Content-Type: application/json
 
 ```json
 {
-  "password": "1234"
+  "password": "2345"
 }
 ```
 
 | 이름       | 데이터타입  | 설명          |
 |:---------|:-------|:------------|
 | password | String | 삭제 검증용 비밀번호 |
+
+#### Response Header
+
+```
+Content-Type: application/json
+```
+
+| 이름           | 데이터타입            | 설명        |
+|:-------------|:-----------------|:----------|
+| Content-Type | application/json | 응답 데이터 형식 |
+
+#### Response Body
+✅ 200 OK
+
+```json
+{
+  "message": "삭제 완료",
+  "data": null
+}
+```
+
+#### response 구조
+| 이름      | 데이터타입  | 설명           |
+|:--------|:-------|:-------------|
+| message | String | 응답 메세지       |
+| data    | Object | 응답 데이터(null) |
 
 </details>
 
@@ -357,6 +440,34 @@ Content-Type: application/json
 | 400   | 400        | 잘못된 요청 (요청 데이터 오류, 비밀번호 오류) |
 | 404   | 404        | 해당 일정이 존재하지 않음              | 
 | 500   | 500        | 서버 내부 오류                    | 
+
+<details><summary>example - 400</summary>
+
+```json
+{
+  "message": "30자 이내로 작성해주세요.",
+  "data": null
+}
+```
+
+```json
+{
+  "message": "비밀번호가 일치하지 않습니다.",
+  "data": null
+}
+```
+
+</details>
+<details><summary>example - 404</summary>
+
+```json
+{
+    "message": "존재하지 않는 일정입니다.",
+    "data": null
+}
+```
+
+</details>
 
 ---
 
