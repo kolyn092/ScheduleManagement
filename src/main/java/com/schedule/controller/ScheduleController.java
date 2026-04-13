@@ -38,7 +38,12 @@ public class ScheduleController {
 
     @GetMapping("/api/schedules/{id}")
     public ResponseEntity<ApiResponse<ScheduleDetailResponse>> get(@PathVariable Long id) {
-        var res = scheduleService.get(id);
+        ScheduleDetailResponse res;
+        try {
+            res = scheduleService.get(id);
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.fail(e.getMessage()));
+        }
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success("조회 완료", res));
     }
 
