@@ -579,7 +579,7 @@ erDiagram
 | password    | VARCHAR(128) | NO       |     |         | 비밀번호     |
 | createdAt   | DATETIME     | NO       |     |         | 생성일      |
 | modifiedAt  | DATETIME     | NO       |     |         | 수정일      |
-| schedule_id | BIGINT       | NO       | FK  |         | 일정 id    |
+| schedule_id | BIGINT       | NO       |     |         | 일정 id    |
 
 </details>
 
