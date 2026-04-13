@@ -7,4 +7,22 @@ public class UpdateScheduleRequest {
     private String title;
     private String author;
     private String password;
+
+    public void validation() {
+        if (title.isEmpty() || title.isBlank()) {
+            throw new IllegalArgumentException("필수 입력 값이 입력되지 않았습니다.");
+        }
+
+        if (author.isEmpty() || author.isBlank()) {
+            throw new IllegalArgumentException("필수 입력 값이 입력되지 않았습니다.");
+        }
+
+        if (password.isEmpty() || password.isBlank()) {
+            throw new IllegalArgumentException("필수 입력 값이 입력되지 않았습니다.");
+        }
+
+        if (title.length() >= 30) {
+            throw new IllegalArgumentException("30자 이내로 작성해주세요.");
+        }
+    }
 }
