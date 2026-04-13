@@ -582,3 +582,14 @@ erDiagram
 | schedule_id | BIGINT       | NO       | FK  |         | 일정 id    |
 
 </details>
+
+---
+
+1. 3 Layer Architecture(Controller, Service, Repository)의 구조가 왜 필요할까?
+
+     계층을 명확하게 분리하기 때문에 유지보수하거나 확장하기 편해지기 때문이다.
+    
+2. `@RequestParam`, `@PathVariable`, `@RequestBody`가 각각 어떤 어노테이션이며, 어떤 특징을 갖고 있을까?
+    - `@RequestParam` : 쿼리 파라미터를 받기 위해 사용한다.
+    - `@PathVariable` : URL 경로에 값을 받기 위해 사용한다.
+    - `@RequestBody` : 요청 JSON 데이터를 객체로 변환하는 역할을 한다.
