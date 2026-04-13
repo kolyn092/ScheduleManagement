@@ -20,6 +20,7 @@ public class CommentService {
 
     @Transactional
     public CommentResponse create(Long scheduleId, CreateCommentRequest req) {
+        req.validation();   // 입력 값 검증
         var schedule = scheduleRepository.findById(scheduleId).orElseThrow(
                 () -> new IllegalStateException("존재하지 않는 일정입니다.")
         );
