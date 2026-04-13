@@ -9,15 +9,15 @@ public class CreateCommentRequest {
     private String password;
 
     public void validation() {
-        if (content.isEmpty() || content.isBlank()) {
+        if (content == null || content.isEmpty() || content.isBlank()) {
             throw new IllegalArgumentException("필수 입력 값이 입력되지 않았습니다.");
         }
 
-        if (author.isEmpty() || author.isBlank()) {
+        if (author == null || author.isEmpty() || author.isBlank()) {
             throw new IllegalArgumentException("필수 입력 값이 입력되지 않았습니다.");
         }
 
-        if (password.isEmpty() || password.isBlank()) {
+        if (password == null || password.isEmpty() || password.isBlank()) {
             throw new IllegalArgumentException("필수 입력 값이 입력되지 않았습니다.");
         }
 
