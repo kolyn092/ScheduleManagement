@@ -3,8 +3,8 @@ package com.schedule.controller;
 import com.schedule.dto.request.CreateScheduleRequest;
 import com.schedule.dto.request.DeleteScheduleRequest;
 import com.schedule.dto.request.UpdateScheduleRequest;
+import com.schedule.dto.response.ScheduleDetailResponse;
 import com.schedule.dto.response.ScheduleResponse;
-import com.schedule.entity.Schedule;
 import com.schedule.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,7 +31,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/api/schedules/{id}")
-    public ResponseEntity<ScheduleResponse> get(@PathVariable Long id) {
+    public ResponseEntity<ScheduleDetailResponse> get(@PathVariable Long id) {
         var res = scheduleService.get(id);
         return ResponseEntity.status(HttpStatus.OK).body(res);
     }

@@ -3,8 +3,11 @@ package com.schedule.service;
 import com.schedule.dto.request.CreateScheduleRequest;
 import com.schedule.dto.request.DeleteScheduleRequest;
 import com.schedule.dto.request.UpdateScheduleRequest;
+import com.schedule.dto.response.CommentResponse;
+import com.schedule.dto.response.ScheduleDetailResponse;
 import com.schedule.dto.response.ScheduleResponse;
 import com.schedule.entity.Schedule;
+import com.schedule.repository.CommentRepository;
 import com.schedule.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,9 +18,11 @@ import java.util.List;
 public class ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
+    private final CommentRepository commentRepository;
 
-    public ScheduleService(ScheduleRepository scheduleRepository) {
+    public ScheduleService(ScheduleRepository scheduleRepository, CommentRepository commentRepository) {
         this.scheduleRepository = scheduleRepository;
+        this.commentRepository = commentRepository;
     }
 
     // 일정 생성
@@ -40,11 +45,12 @@ public class ScheduleService {
     }
 
     @Transactional(readOnly = true)
-    public ScheduleResponse get(Long id) {
+    public ScheduleDetailResponse get(Long id) {
         var schedule = scheduleRepository.findById(id).orElseThrow(
                 () -> new IllegalStateException("존재하지 않는 일정입니다.")
         );
-        return ScheduleResponse.from(schedule);
+        var comments = commentRepository.findAllBySchedule_Id(schedule.getId());
+        return ScheduleDetailResponse.from(schedule, CommentResponse.from(comments));
     }
 
     @Transactional
