@@ -20,7 +20,12 @@ public class ScheduleController {
 
     @PostMapping("/api/schedules")
     public ResponseEntity<ScheduleResponse> create(@RequestBody CreateScheduleRequest req) {
-        var res = scheduleService.create(req);
+        ScheduleResponse res;
+        try {
+            res = scheduleService.create(req);
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
 

@@ -28,6 +28,7 @@ public class ScheduleService {
     // 일정 생성
     @Transactional
     public ScheduleResponse create(CreateScheduleRequest req) {
+        req.validation();   // 입력 값 검증
         var schedule = Schedule.to(req);
         var res = scheduleRepository.save(schedule);
         return ScheduleResponse.from(res);
