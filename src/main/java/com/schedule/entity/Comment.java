@@ -26,7 +26,7 @@ public class Comment extends BaseEntity {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "schedule_id")
+    @JoinColumn(name = "schedule_id", nullable = false)
     private Schedule schedule;
 
     public Comment(String content, String author, String password, Schedule schedule) {
