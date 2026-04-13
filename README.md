@@ -352,18 +352,43 @@ Content-Type: application/json
 
 #### ❌ Error Code
 
-| 오류 코드 | HTTP 상태 코드 | 오류 메시지             |
-|:------|:-----------|:-------------------|
-| 400   | 400        | 잘못된 요청 (요청 데이터 오류) | 
-| 401   | 401        | 비밀번호 오류            | 
-| 404   | 404        | 해당 일정이 존재하지 않음     | 
-| 500   | 500        | 서버 내부 오류           | 
+| 오류 코드 | HTTP 상태 코드 | 오류 메시지                      |
+|:------|:-----------|:----------------------------|
+| 400   | 400        | 잘못된 요청 (요청 데이터 오류, 비밀번호 오류) |
+| 404   | 404        | 해당 일정이 존재하지 않음              | 
+| 500   | 500        | 서버 내부 오류                    | 
 
 ---
 
 ## ERD
 
-<details><summary> Schedule Table </summary>
+```mermaid
+erDiagram
+
+    SCHEDULE {
+        id BIGINT PK "일정 ID"
+        title VARCHAR "제목"
+        content VARCHAR "내용"
+        author VARCHAR "작성자"
+        password VARCHAR "비밀번호"
+        created_at DATETIME "생성일"
+        modified_at DATETIME "수정일"
+    }
+
+    COMMENT {
+        id BIGINT PK "댓글 ID"
+        content VARCHAR "댓글 내용"
+        author VARCHAR "작성자"
+        password VARCHAR "비밀번호"
+        created_at DATETIME "생성일"
+        modified_at DATETIME "수정일"
+        schedule_id BIGINT FK "일정 ID"
+    }
+
+    SCHEDULE ||--o{ COMMENT : "1:N"
+```
+
+<details><summary>Schedule Table</summary>
 
 | Column     | Type         | Nullable       | Key | Default | Desc     |
 |:-----------|:-------------|:---------------|:----|:--------|:---------|
@@ -374,5 +399,19 @@ Content-Type: application/json
 | password   | VARCHAR(128) | NO             |     |         | 비밀번호     |
 | createdAt  | DATETIME     | NO             |     |         | 생성일      |
 | modifiedAt | DATETIME     | NO             |     |         | 수정일      |
+
+</details>
+
+<details><summary>Comment Table</summary>
+
+| Column      | Type         | Nullable | Key | Default | Desc     |
+|:------------|:-------------|:---------|:----|:--------|:---------|
+| id          | BIGINT       | NO       | PK  |         | 댓글 고유 id |
+| content     | VARCHAR(255) | NO       |     |         | 댓글 내용    |
+| author      | VARCHAR(50)  | NO       |     |         | 작성자명     |
+| password    | VARCHAR(128) | NO       |     |         | 비밀번호     |
+| createdAt   | DATETIME     | NO       |     |         | 생성일      |
+| modifiedAt  | DATETIME     | NO       |     |         | 수정일      |
+| schedule_id | BIGINT       | NO       | FK  |         | 일정 id    |
 
 </details>
