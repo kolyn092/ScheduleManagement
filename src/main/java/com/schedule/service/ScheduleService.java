@@ -56,6 +56,7 @@ public class ScheduleService {
 
     @Transactional
     public ScheduleResponse update(Long id, UpdateScheduleRequest req) {
+        req.validation();   // 입력 값 검증
         var schedule = scheduleRepository.findById(id).orElseThrow(
                 () -> new IllegalStateException("존재하지 않는 일정입니다.")
         );
