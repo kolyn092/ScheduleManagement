@@ -4,6 +4,8 @@ import com.schedule.entity.Comment;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 public class CommentResponse {
@@ -30,5 +32,13 @@ public class CommentResponse {
                 comment.getCreatedAt(),
                 comment.getModifiedAt()
         );
+    }
+
+    public static List<CommentResponse> from(List<Comment> comments) {
+        List<CommentResponse> dtos = new ArrayList<>();
+        for (var comment : comments) {
+            dtos.add(from(comment));
+        }
+        return dtos;
     }
 }
