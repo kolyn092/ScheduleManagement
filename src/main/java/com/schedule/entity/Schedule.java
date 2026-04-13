@@ -7,6 +7,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Entity
 @Table(name = "Schedule")
@@ -29,6 +32,9 @@ public class Schedule extends BaseEntity {
     @Column(length = 128, nullable = false)
     private String password;
 
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
     public Schedule(String title, String content, String author, String password) {
         this.title = title;
         this.content = content;
@@ -48,5 +54,9 @@ public class Schedule extends BaseEntity {
     public void update(UpdateScheduleRequest req) {
         this.title = req.getTitle();
         this.author = req.getAuthor();
+    }
+
+    public int getCommentCount() {
+        return this.comments.size();
     }
 }
