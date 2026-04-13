@@ -23,6 +23,9 @@ public class CommentService {
         var schedule = scheduleRepository.findById(scheduleId).orElseThrow(
                 () -> new IllegalStateException("존재하지 않는 일정입니다.")
         );
+        if (schedule.getCommentCount() >= 10) {
+            throw new IllegalArgumentException("하나의 일정에는 댓글은 10개까지만 작성할 수 있습니다.");
+        }
         var comment = Comment.to(req, schedule);
         var res = commentRepository.save(comment);
         return CommentResponse.from(res);

@@ -55,4 +55,8 @@ public class Schedule extends BaseEntity {
         this.title = req.getTitle();
         this.author = req.getAuthor();
     }
+
+    public int getCommentCount() {
+        return this.comments.size();
+    }
 }
