@@ -50,7 +50,7 @@ public class ScheduleService {
         var schedule = scheduleRepository.findById(id).orElseThrow(
                 () -> new IllegalStateException("존재하지 않는 일정입니다.")
         );
-        var comments = commentRepository.findAllBySchedule_Id(schedule.getId());
+        var comments = commentRepository.findAllByScheduleId(schedule.getId());
         return ScheduleDetailResponse.from(schedule, CommentResponse.from(comments));
     }
 

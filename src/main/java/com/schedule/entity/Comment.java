@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "Comment")
+@Table(name = "Comments")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment extends BaseEntity {
 
@@ -25,23 +25,22 @@ public class Comment extends BaseEntity {
     @Column(length = 128, nullable = false)
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "schedule_id", nullable = false)
-    private Schedule schedule;
+    @Column(nullable = false)
+    private Long scheduleId;
 
-    public Comment(String content, String author, String password, Schedule schedule) {
+    public Comment(String content, String author, String password, Long scheduleId) {
         this.content = content;
         this.author = author;
         this.password = password;
-        this.schedule = schedule;
+        this.scheduleId = scheduleId;
     }
 
-    public static Comment to(CreateCommentRequest req, Schedule schedule) {
+    public static Comment to(CreateCommentRequest req, Long scheduleId) {
         return new Comment(
                 req.getContent(),
                 req.getAuthor(),
                 req.getPassword(),
-                schedule
+                scheduleId
         );
     }
 }
