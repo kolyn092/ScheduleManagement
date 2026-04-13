@@ -3,6 +3,7 @@ package com.schedule.controller;
 import com.schedule.dto.request.CreateScheduleRequest;
 import com.schedule.dto.request.DeleteScheduleRequest;
 import com.schedule.dto.request.UpdateScheduleRequest;
+import com.schedule.dto.response.ApiResponse;
 import com.schedule.dto.response.ScheduleDetailResponse;
 import com.schedule.dto.response.ScheduleResponse;
 import com.schedule.service.ScheduleService;
@@ -19,50 +20,50 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @PostMapping("/api/schedules")
-    public ResponseEntity<ScheduleResponse> create(@RequestBody CreateScheduleRequest req) {
+    public ResponseEntity<ApiResponse<ScheduleResponse>> create(@RequestBody CreateScheduleRequest req) {
         ScheduleResponse res;
         try {
             res = scheduleService.create(req);
-        } catch (IllegalArgumentException ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResponse.fail(e.getMessage()));
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(res);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("생성 완료", res));
     }
 
     @GetMapping("/api/schedules")
-    public ResponseEntity<List<ScheduleResponse>> getAll(@RequestParam(required = false) String author) {
+    public ResponseEntity<ApiResponse<List<ScheduleResponse>>> getAll(@RequestParam(required = false) String author) {
         var res = scheduleService.getAll(author);
-        return ResponseEntity.status(HttpStatus.OK).body(res);
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success("조회 완료", res));
     }
 
     @GetMapping("/api/schedules/{id}")
-    public ResponseEntity<ScheduleDetailResponse> get(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<ScheduleDetailResponse>> get(@PathVariable Long id) {
         var res = scheduleService.get(id);
-        return ResponseEntity.status(HttpStatus.OK).body(res);
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success("조회 완료", res));
     }
 
     @PatchMapping("/api/schedules/{id}")
-    public ResponseEntity<ScheduleResponse> update(@PathVariable Long id, @RequestBody UpdateScheduleRequest req) {
+    public ResponseEntity<ApiResponse<ScheduleResponse>> update(@PathVariable Long id, @RequestBody UpdateScheduleRequest req) {
         ScheduleResponse res;
         try {
             res = scheduleService.update(id, req);
         } catch (IllegalStateException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.fail(e.getMessage()));
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResponse.fail(e.getMessage()));
         }
-        return ResponseEntity.status(HttpStatus.OK).body(res);
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success("수정 완료", res));
     }
 
     @DeleteMapping("/api/schedules/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id, @RequestBody DeleteScheduleRequest req) {
+    public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id, @RequestBody DeleteScheduleRequest req) {
         try {
             scheduleService.delete(id, req);
         } catch (IllegalStateException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.fail(e.getMessage()));
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResponse.fail(e.getMessage()));
         }
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success("삭제 완료", null));
     }
 }
