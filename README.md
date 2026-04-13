@@ -1,8 +1,62 @@
 # 📅 ScheduleManagement
 
+Spring Boot 기반의 일정 관리 시스템입니다.
+
+일정 생성, 조회, 수정, 삭제가 가능하고 댓글 등록이 가능합니다.
+
 ---
 
-## API 명세서
+## 🚀 개발 환경
+
+- Language: Java (JDK 17)
+- Framework: Spring Boot, Spring Web, Spring Data JPA, Hibernate
+- IDE: IntelliJ
+
+---
+
+## 🏗️ 패키지 구조
+
+```
+com.schedule
+├── controller     # HTTP 요청/응답 처리
+├── service        # 비즈니스 로직 처리
+├── repository     # DB CRUD 처리
+├── entity         # DB 테이블과 매핑되는 Entity
+└── dto            # 계층 간 데이터 전달 객체
+     ├─ request
+     └─ response 
+```
+
+---
+
+## 🧩 주요 기능
+
+- 일정 생성
+- 일정 조회 - 전체 조회(작성자명 여부는 옵션), 선택 조회(댓글 포함)
+- 일정 수정 (비밀번호 검증)
+- 일정 삭제 (비밀번호 검증)
+- 댓글 등록
+- 유저 입력 검증
+
+---
+
+## ⚠️ 예외 처리
+### 데이터 없음
+- 존재하지 않는 일정 조회 시 NOT_FOUND(404) 반환
+###  잘못된 요청
+- 유저 입력 검증 실패 시 BAD_REQUEST(400) 반환
+### 비밀번호 인증 실패
+- 비밀번호가 다른 경우 BAD_REQUEST(400) 반환
+
+---
+
+## 🧾 실행 방법
+```
+git clone https://github.com/kolyn092/ScheduleManagement.git
+./gradlew bootRun
+```
+
+## 📄 API 명세서
 
 ### 일정 생성 (POST)
 
@@ -471,7 +525,7 @@ Content-Type: application/json
 
 ---
 
-## ERD
+## 🗄️ ERD
 
 ```mermaid
 erDiagram
