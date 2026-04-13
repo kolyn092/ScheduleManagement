@@ -549,10 +549,10 @@ erDiagram
         password VARCHAR "비밀번호"
         created_at DATETIME "생성일"
         modified_at DATETIME "수정일"
-        schedule_id BIGINT FK "일정 ID"
+        schedule_id BIGINT "일정 ID"
     }
 
-    SCHEDULE ||--o{ COMMENT : "1:N"
+    SCHEDULE ||--o{ COMMENT : ""
 ```
 
 <details><summary>Schedule Table</summary>
