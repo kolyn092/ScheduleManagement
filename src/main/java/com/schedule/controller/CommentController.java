@@ -1,6 +1,7 @@
 package com.schedule.controller;
 
 import com.schedule.dto.request.CreateCommentRequest;
+import com.schedule.dto.response.ApiResponse;
 import com.schedule.dto.response.CommentResponse;
 import com.schedule.service.CommentService;
 import org.springframework.http.HttpStatus;
@@ -19,15 +20,15 @@ public class CommentController {
     }
 
     @PostMapping("/api/schedules/{scheduleId}/comments")
-    public ResponseEntity<CommentResponse> create(@PathVariable Long scheduleId, @RequestBody CreateCommentRequest req) {
+    public ResponseEntity<ApiResponse<CommentResponse>> create(@PathVariable Long scheduleId, @RequestBody CreateCommentRequest req) {
         CommentResponse res;
         try {
             res = commentService.create(scheduleId, req);
         } catch (IllegalStateException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.fail(e.getMessage()));
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResponse.fail(e.getMessage()));
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(res);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("생성 완료", res));
     }
 }
